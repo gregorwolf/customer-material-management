@@ -7,3 +7,11 @@ service CustomerMaterialService {
   entity A_CustomerMaterial as projection on externalCustomerMaterial.A_CustomerMaterial;
 
 }
+
+annotate CustomerMaterialService with @(requires: 'authenticated-user');
+// eature not supported: Method .0 of fluent API 
+/*
+annotate CustomerMaterialService.A_CustomerMaterial with @(restrict: [ 
+  { grant: 'READ', where: 'Customer = $user.customer' } 
+]);
+*/

@@ -1,2 +1,16 @@
+### Read count Customer Material
+### Feature not supported: Method .count of fluent API
+GET http://localhost:4004/customer-material/A_CustomerMaterial?$count=true
+Authorization: Basic customer1:customer1
+
 ### Read Customer Material
-GET http://localhost:4004/customer-material/A_CustomerMaterial
+GET http://localhost:4004/customer-material/A_CustomerMaterial?$select=Material,MaterialByCustomer
+Authorization: Basic customer1:customer1
+
+### Read Customer Material filtered
+GET http://localhost:4004/customer-material/A_CustomerMaterial?$filter=Material eq 'TG11'&$select=Material,MaterialByCustomer
+Authorization: Basic customer1:customer1
+
+### Read Customer Material filtered
+GET http://localhost:4004/customer-material/A_CustomerMaterial?$filter=Customer eq '1000046'&$select=Material,MaterialByCustomer
+Authorization: Basic customer1:customer1
