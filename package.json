@@ -1,23 +1,41 @@
 {
-    "name": "customer-material-management",
-    "version": "1.0.0",
-    "description": "A simple CAP project.",
-    "repository": "<Add your repository here>",
-    "license": "UNLICENSED",
-    "private": true,
-    "dependencies": {
-        "@sap/cds": "^3",
-        "express": "^4",
-        "@sap/hana-client": "^2.4.177"
-    },
-    "scripts": {
-        "start": "npx cds run"
-    },
-    "cds": {
-        "requires": {
-            "db": {
-                "kind": "hana"
-            }
+  "name": "customer-material-management",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^4.1.9",
+    "@sap/hana-client": "^2.5.109",
+    "express": "^4.17.1",
+    "passport": "^0.4.1"
+  },
+  "devDependencies": {
+    "@sap/cds-dk": "^3.0.0",
+    "sqlite3": "^5.0.0"
+  },
+  "scripts": {
+    "start": "npx cds run",
+    "start:mocked": "npx cds run --in-memory --with-mocks"
+  },
+  "cds": {
+    "requires": {
+      "xdb": {
+        "kind": "hana"
+      },
+      "API_CUSTOMER_MATERIAL_SRV": {
+        "kind": "odata",
+        "model": "srv/external/API_CUSTOMER_MATERIAL_SRV",
+        "credentials": {
+          "destination": "S4H",
+          "requestTimeout": 30000
+        },
+        "pool": {
+          "min": 1,
+          "max": 10
         }
+      }
     }
+  }
 }

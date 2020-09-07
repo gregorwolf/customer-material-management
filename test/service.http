@@ -1,0 +1,2 @@
+### Read Customer Material
+GET http://localhost:4004/customer-material/A_CustomerMaterial
