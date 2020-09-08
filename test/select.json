@@ -1,0 +1,76 @@
+{
+  from: {
+    ref: [
+      "CustomerMaterialService.A_CustomerMaterial",
+    ],
+  },
+  columns: [
+    {
+      ref: [
+        "Material",
+      ],
+    },
+    {
+      ref: [
+        "MaterialByCustomer",
+      ],
+    },
+    {
+      ref: [
+        "SalesOrganization",
+      ],
+    },
+    {
+      ref: [
+        "DistributionChannel",
+      ],
+    },
+    {
+      ref: [
+        "Customer",
+      ],
+    },
+  ],
+  limit: {
+    rows: {
+      val: 1000,
+    },
+  },
+  orderBy: [
+    {
+      ref: [
+        "SalesOrganization",
+      ],
+      sort: "asc",
+    },
+    {
+      ref: [
+        "DistributionChannel",
+      ],
+      sort: "asc",
+    },
+    {
+      ref: [
+        "Customer",
+      ],
+      sort: "asc",
+    },
+    {
+      ref: [
+        "Material",
+      ],
+      sort: "asc",
+    },
+  ],
+  where: [
+    {
+      ref: [
+        "Customer",
+      ],
+    },
+    "=",
+    {
+      val: "1000021",
+    },
+  ],
+}

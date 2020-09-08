@@ -1,0 +1,87 @@
+{
+  from: {
+    ref: [
+      {
+        id: "CustomerMaterialService.A_CustomerMaterial",
+        where: [
+          {
+            ref: [
+              "SalesOrganization",
+            ],
+          },
+          "=",
+          {
+            val: "1710",
+          },
+          "and",
+          {
+            ref: [
+              "DistributionChannel",
+            ],
+          },
+          "=",
+          {
+            val: "10",
+          },
+          "and",
+          {
+            ref: [
+              "Customer",
+            ],
+          },
+          "=",
+          {
+            val: "1000021",
+          },
+          "and",
+          {
+            ref: [
+              "Material",
+            ],
+          },
+          "=",
+          {
+            val: "TG11",
+          },
+          "and",
+          {
+            ref: [
+              "Customer",
+            ],
+          },
+          "=",
+          {
+            val: "1000021",
+          },
+        ],
+      },
+    ],
+  },
+  columns: [
+    {
+      ref: [
+        "Material",
+      ],
+    },
+    {
+      ref: [
+        "MaterialByCustomer",
+      ],
+    },
+    {
+      ref: [
+        "SalesOrganization",
+      ],
+    },
+    {
+      ref: [
+        "DistributionChannel",
+      ],
+    },
+    {
+      ref: [
+        "Customer",
+      ],
+    },
+  ],
+}

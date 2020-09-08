@@ -16,20 +16,25 @@ module.exports = async function (){
         '=',
         {val: customer}
       ]
-      if(req.query && req.query.SELECT.where) {
-        req.query.SELECT.where.push(
-        'and'
-        )
-        Array.prototype.push.apply(req.query.SELECT.where, customerFilter)
+      // Select for a single entity is different
+      if(req.query.SELECT.from && req.query.SELECT.from.ref[0] && req.query.SELECT.from.ref[0].where) {
+        req.query.SELECT.from.ref[0].where.push('and')
+        Array.prototype.push.apply(req.query.SELECT.from.ref[0].where, customerFilter)
       } else {
-        req.query.SELECT.where = customerFilter
-      } 
+        if(req.query && req.query.SELECT.where) {
+          req.query.SELECT.where.push('and')
+          Array.prototype.push.apply(req.query.SELECT.where, customerFilter)
+        } else {
+          req.query.SELECT.where = customerFilter
+        }  
+      }
       // console.log(req.query)
       // console.log(req.user)
       let result = await tx.run(req.query)
       return result
     } catch (error) {
-      console.error(error.message)
+      console.error("Error Message: " + error.message)
+      console.error("Request Patch: " + error.request.path)
     }
   })
 
