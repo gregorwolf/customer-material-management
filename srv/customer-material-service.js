@@ -1,17 +1,21 @@
 const cds = require('@sap/cds')
 
-module.exports = async function (){
+module.exports = async function (srv){
 
   const externalCustomerMaterial = await cds.connect.to('API_CUSTOMER_MATERIAL_SRV')
 
-  this.on ('READ','A_CustomerMaterial', async req => {
+  srv.on ('READ','A_CustomerMaterial', async req => {
     const tx = externalCustomerMaterial.transaction(req)
     try {
+      // Remove Count as it's not supported for external service call
+      if(req.query.SELECT.count) {
+        delete req.query.SELECT.count
+      }
       // Restrict to Customer in User attribute
       /*
       */
-     var customer = req.user.attr.customer
-     var customerFilter = [
+      var customer = req.user.attr.customer
+      var customerFilter = [
         {ref:['Customer']},
         '=',
         {val: customer}
@@ -34,8 +38,14 @@ module.exports = async function (){
       return result
     } catch (error) {
       console.error("Error Message: " + error.message)
-      console.error("Request Patch: " + error.request.path)
+      if(error.request && error.request.path) {
+        console.error("Request Patch: " + error.request.path)
+      }
     }
+  })
+
+  srv.after('READ', 'A_CustomerMaterial', (customerMaterial,req) => {
+    customerMaterial.$count = customerMaterial.length
   })
 
 }
