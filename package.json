@@ -1,9 +1,9 @@
 {
   "name": "customer-material-management",
   "version": "1.0.0",
-  "description": "A simple CAP project.",
-  "repository": "<Add your repository here>",
-  "license": "UNLICENSED",
+  "description": "Customer Material Management",
+  "repository": "https://github.com/gregorwolf/customer-material-management",
+  "license": "MIT",
   "private": true,
   "dependencies": {
     "@sap/cds": "^4.1.9",
