@@ -9,7 +9,7 @@ service CustomerMaterialService {
 }
 
 annotate CustomerMaterialService with @(requires: 'authenticated-user');
-// eature not supported: Method .0 of fluent API 
+// Feature not supported: Method .0 of fluent API 
 /*
 annotate CustomerMaterialService.A_CustomerMaterial with @(restrict: [ 
   { grant: 'READ', where: 'Customer = $user.customer' } 
