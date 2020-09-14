@@ -1,5 +1,7 @@
 # Customer Material Management
 
+Add the following content to **default-env.json**:
+
 ```JSON
 {
   "VCAP_SERVICES": {
