@@ -2,7 +2,8 @@
 _out
 *.db
 connection.properties
-default-*.json
+# For training purpose
+# default-*.json
 gen/
 node_modules/
 package-lock.json
