@@ -5,37 +5,38 @@ module.exports = async function (srv){
   const externalCustomerMaterial = await cds.connect.to('API_CUSTOMER_MATERIAL_SRV')
 
   srv.on ('READ','A_CustomerMaterial', async req => {
-    const tx = externalCustomerMaterial.transaction(req)
+    const externalCustomerMaterialTransaction = externalCustomerMaterial.transaction(req)
     try {
       // Remove Count as it's not supported for external service call
       if(req.query.SELECT.count) {
         delete req.query.SELECT.count
       }
       // Restrict to Customer in User attribute
-      /*
-      */
       var customer = req.user.attr.customer
-      var customerFilter = [
-        {ref:['Customer']},
-        '=',
-        {val: customer}
-      ]
-      // Select for a single entity is different
+      var customerFilter = {Customer: customer}
+      // Works but needs custom handling for read
       if(req.query.SELECT.from && req.query.SELECT.from.ref[0] && req.query.SELECT.from.ref[0].where) {
-        req.query.SELECT.from.ref[0].where.push('and')
-        Array.prototype.push.apply(req.query.SELECT.from.ref[0].where, customerFilter)
+        // single read
+        var query = SELECT.from(req.target).where(req.data).where(customerFilter)
+        if(req.query.SELECT.columns) {
+          query.columns();
+        }
+        let results = await externalCustomerMaterialTransaction.run(query)
+        return results[0]
       } else {
-        if(req.query && req.query.SELECT.where) {
-          req.query.SELECT.where.push('and')
-          Array.prototype.push.apply(req.query.SELECT.where, customerFilter)
-        } else {
-          req.query.SELECT.where = customerFilter
-        }  
+        // Query
+        req.query.where(customerFilter)
+        let result = await externalCustomerMaterialTransaction.run(req.query)
+        return result
       }
-      // console.log(req.query)
-      // console.log(req.user)
-      let result = await tx.run(req.query)
+      /*
+      // Creates:
+      // Request Patch: /sap/opu/odata/sap/API_CUSTOMER_MATERIAL_SRV/%5Bobject%20Object%5D?$select=Material,MaterialByCustomer,SalesOrganization,DistributionChannel,Customer&$filter=Customer%20eq%20%271000021%27&$format=json
+      // for single and mails.
+      req.query.where(customerFilter)
+      let result = await externalCustomerMaterialTransaction.run(req.query)
       return result
+      */
     } catch (error) {
       console.error("Error Message: " + error.message)
       if(error.request && error.request.path) {
@@ -45,7 +46,9 @@ module.exports = async function (srv){
   })
 
   srv.after('READ', 'A_CustomerMaterial', (customerMaterial,req) => {
-    customerMaterial.$count = customerMaterial.length
+    if(customerMaterial.length) {
+      customerMaterial.$count = customerMaterial.length
+    }
   })
 
 }

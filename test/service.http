@@ -15,8 +15,12 @@ Authorization: Basic customer1:customer1
 GET http://localhost:4004/v2/customer-material/A_CustomerMaterial?$select=Material,MaterialByCustomer
 Authorization: Basic customer1:customer1
 
-### Read Single Customer Material V2
+### Read Single Customer Material V2 and restrict columns
 GET http://localhost:4004/v2/customer-material/A_CustomerMaterial%28SalesOrganization%3D%271710%27%2CDistributionChannel%3D%2710%27%2CCustomer%3D%271000021%27%2CMaterial%3D%27TG11%27%29?$select=Material,MaterialByCustomer
+Authorization: Basic customer1:customer1
+
+### Read Single Customer Material V2 all columns
+GET http://localhost:4004/v2/customer-material/A_CustomerMaterial%28SalesOrganization%3D%271710%27%2CDistributionChannel%3D%2710%27%2CCustomer%3D%271000021%27%2CMaterial%3D%27TG11%27%29
 Authorization: Basic customer1:customer1
 
 ### Read Customer Material filtered
