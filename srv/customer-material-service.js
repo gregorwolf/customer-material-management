@@ -7,10 +7,6 @@ module.exports = async function (srv){
   srv.on ('READ','A_CustomerMaterial', async req => {
     const externalCustomerMaterialTransaction = externalCustomerMaterial.transaction(req)
     try {
-      // Remove Count as it's not supported for external service call
-      if(req.query.SELECT.count) {
-        delete req.query.SELECT.count
-      }
       // Restrict to Customer in User attribute
       var customer = req.user.attr.customer
       var customerFilter = {Customer: customer}
