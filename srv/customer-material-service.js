@@ -1,5 +1,10 @@
 const cds = require('@sap/cds')
 
+function getCustomerFilter(req) {
+  var customer = req.user.attr.customer
+  return {Customer: customer}
+}
+
 module.exports = async function (srv){
 
   const externalCustomerMaterial = await cds.connect.to('API_CUSTOMER_MATERIAL_SRV')
@@ -8,8 +13,7 @@ module.exports = async function (srv){
     const externalCustomerMaterialTransaction = externalCustomerMaterial.transaction(req)
     try {
       // Restrict to Customer in User attribute
-      var customer = req.user.attr.customer
-      var customerFilter = {Customer: customer}
+      var customerFilter = getCustomerFilter(req)
       // Works but needs custom handling for read
       if(req.query.SELECT.from && req.query.SELECT.from.ref[0] && req.query.SELECT.from.ref[0].where) {
         // single read
@@ -41,8 +45,24 @@ module.exports = async function (srv){
     }
   })
 
+  srv.on ('READ','A_CustomerMaterialSimple', async req => {
+    const externalCustomerMaterialTransaction = externalCustomerMaterial.transaction(req)
+    try {
+      // Restrict to Customer in User attribute
+      var customerFilter = getCustomerFilter(req)
+      req.query.where(customerFilter)
+      let result = await externalCustomerMaterialTransaction.run(req.query)
+      return result
+    } catch (error) {
+      console.error("Error Message: " + error.message)
+      if(error.request && error.request.path) {
+        console.error("Request Patch: " + error.request.path)
+      }
+    }
+  })
+
   srv.after('READ', 'A_CustomerMaterial', (customerMaterial,req) => {
-    if(customerMaterial.length) {
+    if(customerMaterial && customerMaterial.length) {
       customerMaterial.$count = customerMaterial.length
     }
   })

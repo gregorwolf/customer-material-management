@@ -5,6 +5,7 @@ using { API_CUSTOMER_MATERIAL_SRV as externalCustomerMaterial } from './external
 service CustomerMaterialService {
 
   entity A_CustomerMaterial as projection on externalCustomerMaterial.A_CustomerMaterial;
+  entity A_CustomerMaterialSimple as projection on externalCustomerMaterial.A_CustomerMaterial;
 
 }
 
