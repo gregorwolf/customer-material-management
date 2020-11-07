@@ -6,14 +6,13 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "@sap/cds": "^4.2.4",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.4.50",
-    "@sap/hana-client": "^2.6.58",
+    "@sap/cds": "^4.3.0",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.4.54",
+    "@sap/hana-client": "^2.6.61",
     "express": "^4.17.1",
     "passport": "^0.4.1"
   },
   "devDependencies": {
-    "@sap/cds-dk": "^3.1.2",
     "sqlite3": "^5.0.0"
   },
   "scripts": {
