@@ -6,6 +6,17 @@
     {
       "name": "uaa.user",
       "description": "UAA"
+    },
+    {
+      "name": "$XSAPPNAME.Display",
+      "description": "display"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "customer",
+      "description": "Customer",
+      "valueType": "string"
     }
   ],
   "role-templates": [
@@ -14,6 +25,16 @@
       "description": "UAA",
       "scope-references": [
         "uaa.user"
+      ]
+    },
+    {
+      "name": "Viewer",
+      "description": "View all",
+      "scope-references": [
+        "$XSAPPNAME.Display"
+      ],
+      "attribute-references": [
+        "customer"
       ]
     }
   ]
