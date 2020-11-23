@@ -41,6 +41,9 @@ modules:
   - name: customer-material-management-srv
     type: nodejs
     path: gen/srv
+    parameters:
+      memory: 512M
+      disk-quota: 1024M
     properties:
       EXIT: 1  # required by deploy.js task to terminate 
     requires:
