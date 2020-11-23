@@ -1,0 +1,11 @@
+{
+  "name": "customer-material-management-ui",
+  "version": "0.0.2",
+  "description": "",
+  "dependencies": {
+    "@sap/approuter": "^8.6.0"
+  },
+  "scripts": {
+    "start": "node node_modules/@sap/approuter/approuter.js"
+  }
+}

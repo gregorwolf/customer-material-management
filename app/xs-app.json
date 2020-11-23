@@ -1,0 +1,13 @@
+{
+  "welcomeFile": "/",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+      "source": "/(.*)$",
+      "target": "/$1",
+      "authenticationType": "xsuaa",
+      "destination": "srv_api",
+      "csrfProtection": true
+    }
+  ]
+}

@@ -18,22 +18,40 @@ build-parameters:
       - npx cds build
 
 modules:
- # --------------------- SERVER MODULE ------------------------
- - name: customer-material-management-srv
- # ------------------------------------------------------------
-   type: nodejs
-   path: gen/srv
-   properties:
-     EXIT: 1  # required by deploy.js task to terminate 
-   requires:
-    # Resources extracted from CAP configuration
-      - name: customer-material-management-destination-service
-      - name: customer-material-management-connectivity-service
-#      - name: customer-material-management-db
-   provides:
-    - name: srv-api      # required by consumers of CAP services (e.g. approuter)
-      properties:
-        srv-url: ${default-url}
+  # ------------------- APPROUTER MODULE -----------------------
+  - name: customer-material-management-ui
+    type: approuter.nodejs
+    path: approuter
+    parameters:
+      memory: 256M
+      disk-quota: 1024M
+    build-parameters:
+      ignore: ["node_modules/"]
+    requires:
+      - name: customer-material-management-uaa
+      - name: srv_api
+        group: destinations
+        properties:
+          -srv_api:
+            forwardAuthToken: true
+            strictSSL: false
+            name: srv_api
+            url: ~{url}
+  # --------------------- SERVER MODULE ------------------------
+  - name: customer-material-management-srv
+    type: nodejs
+    path: gen/srv
+    properties:
+      EXIT: 1  # required by deploy.js task to terminate 
+    requires:
+     # Resources extracted from CAP configuration
+       - name: customer-material-management-destination-service
+       - name: customer-material-management-connectivity-service
+ #      - name: customer-material-management-db
+    provides:
+     - name: srv_api      # required by consumers of CAP services (e.g. approuter)
+       properties:
+         srv-url: ${default-url}
 
 # # -------------------- SIDECAR MODULE ------------------------
 # - name: db
@@ -50,6 +68,12 @@ modules:
 resources:
  # services extracted from CAP configuration
  # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
+  - name: customer-material-management-uaa
+    type: org.cloudfoundry.managed-service
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
   - name: customer-material-management-destination-service
     type: org.cloudfoundry.managed-service
     parameters:
