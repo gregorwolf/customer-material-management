@@ -21,7 +21,7 @@ modules:
   # ------------------- APPROUTER MODULE -----------------------
   - name: customer-material-management-ui
     type: approuter.nodejs
-    path: approuter
+    path: app
     parameters:
       memory: 256M
       disk-quota: 1024M
@@ -36,7 +36,7 @@ modules:
             forwardAuthToken: true
             strictSSL: false
             name: srv_api
-            url: ~{url}
+            url: ~{srv-url}
   # --------------------- SERVER MODULE ------------------------
   - name: customer-material-management-srv
     type: nodejs
