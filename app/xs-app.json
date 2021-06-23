@@ -1,10 +1,10 @@
 {
-  "welcomeFile": "/",
+  "welcomeFile": "/customer-material/",
   "authenticationMethod": "route",
   "routes": [
     {
-      "source": "/(.*)$",
-      "target": "/$1",
+      "source": "/customer-material/(.*)$",
+      "target": "/customer-material/$1",
       "authenticationType": "xsuaa",
       "destination": "srv_api",
       "csrfProtection": true
