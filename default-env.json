@@ -1,10 +1,9 @@
 {
-  "VCAP_SERVICES": {
-  },
+  "VCAP_SERVICES": {},
   "destinations": [
     {
       "name": "S4H",
-      "url": "https://8cd236b9trial-dev-customer-material-management-mock-srv.cfapps.eu10.hana.ondemand.com/sap/opu/odata/sap/API_CUSTOMER_MATERIAL_SRV"
+      "url": "https://8cd236b9trial-dev-customer-material-management-mock-srv.cfapps.eu10.hana.ondemand.com"
     }
   ]
 }
