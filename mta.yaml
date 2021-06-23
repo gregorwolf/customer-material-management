@@ -32,11 +32,10 @@ modules:
       - name: srv_api
         group: destinations
         properties:
-          -srv_api:
             forwardAuthToken: true
             strictSSL: false
             name: srv_api
-            url: ~{srv-url}
+            url: ~{url}
   # --------------------- SERVER MODULE ------------------------
   - name: customer-material-management-srv
     type: nodejs
@@ -54,9 +53,9 @@ modules:
        - name: customer-material-management-connectivity-service
  #      - name: customer-material-management-db
     provides:
-     - name: srv_api      # required by consumers of CAP services (e.g. approuter)
-       properties:
-         srv-url: ${default-url}
+      - name: srv_api
+        properties:
+          url: ${default-url}
 
 # # -------------------- SIDECAR MODULE ------------------------
 # - name: db
