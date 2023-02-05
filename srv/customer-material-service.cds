@@ -8,9 +8,11 @@ service CustomerMaterialService {
 
   entity A_Product                 as projection on externalProduct.A_Product {
     Product,
-    ProductType
+    ProductType,
+    to_Description
   };
 
+  entity A_ProductDescription      as projection on externalProduct.A_ProductDescription;
   entity A_CustomerMaterialComplex as projection on externalCustomerMaterial.A_CustomerMaterial;
 
 }
