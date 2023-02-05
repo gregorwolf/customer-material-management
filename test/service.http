@@ -1,18 +1,24 @@
 ### Read count Customer Material
 ### Feature not supported: Method .count of fluent API
-GET http://localhost:4004/customer-material/A_CustomerMaterial?$count=true
+GET http://localhost:4004/customer-material/A_CustomerMaterial
+  ?$count=true
 Authorization: Basic customer1:customer1
 
 ### Read with $count is not forwarded to remote service
-GET http://localhost:4004/customer-material/A_CustomerMaterialSimple?$count=true
+GET http://localhost:4004/customer-material/A_CustomerMaterialSimple
+  ?$count=true
 Authorization: Basic customer1:customer1
 
 ### Read Customer Material
-GET http://localhost:4004/customer-material/A_CustomerMaterial?$select=Material,MaterialByCustomer
+GET http://localhost:4004/customer-material/A_CustomerMaterial
+  ?$select=Material,MaterialByCustomer
 Authorization: Basic customer1:customer1
 
 ### Read Customer Material like the Fiori Elements App
-GET http://localhost:4004/customer-material/A_CustomerMaterial?$count=true&$select=Material,MaterialByCustomer&$skip=0&$top=30
+GET http://localhost:4004/customer-material/A_CustomerMaterial
+  ?$count=true&$select=Material,MaterialByCustomer
+  &$skip=0
+  &$top=30
 Authorization: Basic customer1:customer1
 
 ### Read Single Customer Material all columns

@@ -11,6 +11,7 @@
   "dependencies": {
     "@sap/cds": "^6",
     "@sap/cds-odata-v2-adapter-proxy": "^1",
+    "@sap-cloud-sdk/http-client": "^2",
     "hdb": "^0",
     "express": "^4",
     "passport": "^0"
@@ -48,7 +49,7 @@
             "password": "customer1",
             "roles": [],
             "userAttributes": {
-              "customer": "1000021"
+              "customer": "10100080"
             }
           }
         }
