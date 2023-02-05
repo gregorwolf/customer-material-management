@@ -6,17 +6,17 @@
   "license": "MIT",
   "private": false,
   "engines": {
-    "node": "^14"
+    "node": "^16"
   },
   "dependencies": {
-    "@sap/cds": "^5.1.5",
-    "@sap/cds-odata-v2-adapter-proxy": "^1.7.4",
-    "@sap/hana-client": "^2.8.22",
-    "express": "^4.17.1",
-    "passport": "^0.4.1"
+    "@sap/cds": "^6",
+    "@sap/cds-odata-v2-adapter-proxy": "^1",
+    "hdb": "^0",
+    "express": "^4",
+    "passport": "^0"
   },
   "devDependencies": {
-    "sqlite3": "^5.0.2"
+    "sqlite3": "^5"
   },
   "scripts": {
     "start": "export NODE_ENV=development && cds run",
