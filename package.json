@@ -30,7 +30,7 @@
         "kind": "hana"
       },
       "API_CUSTOMER_MATERIAL_SRV": {
-        "kind": "odata",
+        "kind": "odata-v2",
         "model": "srv/external/API_CUSTOMER_MATERIAL_SRV",
         "credentials": {
           "destination": "S4H",
@@ -47,6 +47,13 @@
         "users": {
           "customer1": {
             "password": "customer1",
+            "roles": [],
+            "userAttributes": {
+              "customer": "10100080"
+            }
+          },
+          "admin": {
+            "password": "",
             "roles": [],
             "userAttributes": {
               "customer": "10100080"
