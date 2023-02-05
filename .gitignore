@@ -2,8 +2,8 @@
 _out
 *.db
 connection.properties
-# For training purpose
-# default-*.json
+
+default-*.json
 gen/
 node_modules/
 target/
