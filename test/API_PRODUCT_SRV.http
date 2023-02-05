@@ -1,0 +1,10 @@
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_PRODUCT_SRV/A_Product
+  ?&$top=10
+  &$select=Product,ProductType,to_Description/*
+  #,to_ProductSales/*,to_ProductBasicText/*
+  &$expand=to_Description
+  #,to_ProductSales,to_ProductBasicText
+  &$filter=ProductType eq 'FERT'
+APIKey: {{$dotenv APIKey}}
+Accept: application/json

@@ -13,4 +13,20 @@ annotate service.A_CustomerMaterial with @(UI : {
     {Value : MaterialByCustomer},
     {Value : MaterialDescriptionByCustomer},
   ],
-});
+}) {
+  // https://github.com/SAP-samples/fiori-elements-feature-showcase#value-help
+  Material @(Common : {ValueList : {
+    CollectionPath : 'A_Product',
+    Parameters     : [
+      {
+        $Type             : 'Common.ValueListParameterInOut',
+        ValueListProperty : 'Product',
+        LocalDataProperty : Material
+      },
+      {
+        $Type             : 'Common.ValueListParameterDisplayOnly',
+        ValueListProperty : 'ProductType',
+      },
+    ]
+  }});
+};
