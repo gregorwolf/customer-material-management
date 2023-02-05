@@ -10,6 +10,12 @@ module.exports = async function (srv) {
     "API_CUSTOMER_MATERIAL_SRV"
   );
 
+  const externalProduct = await cds.connect.to("API_PRODUCT_SRV");
+
+  srv.on("READ", "A_Product", async (req) => {
+    return externalProduct.run(req.query);
+  });
+
   srv.on("READ", "A_CustomerMaterial", async (req) => {
     const externalCustomerMaterialTransaction =
       externalCustomerMaterial.transaction(req);

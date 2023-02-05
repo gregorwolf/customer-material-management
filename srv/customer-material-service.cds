@@ -1,10 +1,11 @@
-//using { API_PRODUCT_SRV as externalProduct } from './external/API_PRODUCT_SRV.csn';
+using {API_PRODUCT_SRV as externalProduct} from './external/API_PRODUCT_SRV';
 //using { API_BUSINESS_PARTNER as externalBusinessPartner } from './external/API_BUSINESS_PARTNER.csn';
 using {API_CUSTOMER_MATERIAL_SRV as externalCustomerMaterial} from './external/API_CUSTOMER_MATERIAL_SRV';
 
 service CustomerMaterialService {
 
   entity A_CustomerMaterial        as projection on externalCustomerMaterial.A_CustomerMaterial;
+  entity A_Product                 as projection on externalProduct.A_Product;
   entity A_CustomerMaterialComplex as projection on externalCustomerMaterial.A_CustomerMaterial;
 
 }

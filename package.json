@@ -36,10 +36,15 @@
           "destination": "S4H",
           "requestTimeout": 30000,
           "path": "/sap/opu/odata/sap/API_CUSTOMER_MATERIAL_SRV"
-        },
-        "pool": {
-          "min": 1,
-          "max": 10
+        }
+      },
+      "API_PRODUCT_SRV": {
+        "kind": "odata-v2",
+        "model": "srv/external/API_PRODUCT_SRV",
+        "credentials": {
+          "destination": "S4H",
+          "requestTimeout": 30000,
+          "path": "/sap/opu/odata/sap/API_PRODUCT_SRV"
         }
       },
       "auth": {

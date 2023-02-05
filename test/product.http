@@ -1,0 +1,6 @@
+### Read count Customer Material
+### Feature not supported: Method .count of fluent API
+GET http://localhost:4004/customer-material/A_Product
+  ?$top=10
+  &$filter=Product eq 'MZ-SG-BK-01'
+Authorization: Basic customer1:customer1
