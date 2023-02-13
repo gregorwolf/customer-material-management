@@ -9,20 +9,23 @@
     "node": "^16"
   },
   "dependencies": {
+    "@sap-cloud-sdk/http-client": "^2",
     "@sap/cds": "^6",
     "@sap/cds-odata-v2-adapter-proxy": "^1",
-    "@sap-cloud-sdk/http-client": "^2",
-    "hdb": "^0",
     "express": "^4",
+    "hdb": "^0",
     "passport": "^0"
   },
   "devDependencies": {
+    "@sap/ux-specification": "^1.102.16",
+    "cds-launchpad-plugin": "^1.0.8",
     "sqlite3": "^5"
   },
   "scripts": {
     "start": "export NODE_ENV=development && cds run",
     "start:mocked": "npx cds run --in-memory --with-mocks",
-    "undeploy:cf": "cf undeploy customer-material-management --delete-service-keys --delete-services --delete-service-brokers"
+    "undeploy:cf": "cf undeploy customer-material-management --delete-service-keys --delete-services --delete-service-brokers",
+    "watch-customer-material": "cds watch --open customer-material/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
     "requires": {
@@ -67,5 +70,8 @@
         }
       }
     }
-  }
+  },
+  "sapux": [
+    "app/customer-material"
+  ]
 }
