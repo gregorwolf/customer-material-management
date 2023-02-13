@@ -1,16 +1,11 @@
 const cds = require("@sap/cds");
 
-function getCustomerFilter(req) {
-  var customer = req.user.attr.customer;
-  return { Customer: customer };
-}
-
 module.exports = async function (srv) {
+  // Connect to external services
+  const externalProduct = await cds.connect.to("API_PRODUCT_SRV");
   const externalCustomerMaterial = await cds.connect.to(
     "API_CUSTOMER_MATERIAL_SRV"
   );
-
-  const externalProduct = await cds.connect.to("API_PRODUCT_SRV");
 
   srv.on("READ", "A_Product", async (req) => {
     req.query.where({ ProductType: "FERT" });
@@ -31,18 +26,16 @@ module.exports = async function (srv) {
   });
 
   srv.on("READ", "A_CustomerMaterial", async (req) => {
-    const externalCustomerMaterialTransaction =
-      externalCustomerMaterial.transaction(req);
     try {
       // Restrict to Customer in User attribute
       var customerFilter = getCustomerFilter(req);
       req.query.where(customerFilter);
-      let result = await externalCustomerMaterialTransaction.run(req.query);
+      let result = await externalCustomerMaterial.run(req.query);
       return result;
     } catch (error) {
       console.error("Error Message: " + error.message);
       if (error.request && error.request.path) {
-        console.error("Request Patch: " + error.request.path);
+        console.error("Request path: " + error.request.path);
       }
     }
   });
@@ -97,3 +90,8 @@ module.exports = async function (srv) {
   });
   */
 };
+
+function getCustomerFilter(req) {
+  var customer = req.user.attr.customer;
+  return { Customer: customer };
+}
