@@ -9,6 +9,8 @@ service CustomerMaterialService {
   entity A_Product                 as projection on externalProduct.A_Product {
     Product,
     ProductType,
+    GrossWeight,
+    WeightUnit,
     to_Description
   };
 
@@ -17,7 +19,7 @@ service CustomerMaterialService {
 
 }
 
-annotate CustomerMaterialService with @(requires : 'authenticated-user');
+annotate CustomerMaterialService with @(requires: 'authenticated-user');
 // Feature not supported: Method .0 of fluent API
 /*
 annotate CustomerMaterialService.A_CustomerMaterial with @(restrict: [
