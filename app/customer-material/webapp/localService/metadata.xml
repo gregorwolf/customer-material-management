@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="4.0" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml">
+        <edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml">
+        <edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/UI.xml">
+        <edmx:Include Alias="UI" Namespace="com.sap.vocabularies.UI.v1"/>
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema Namespace="CustomerMaterialService" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+            <EntityContainer Name="EntityContainer">
+                <EntitySet Name="A_CustomerMaterial" EntityType="CustomerMaterialService.A_CustomerMaterial"/>
+                <EntitySet Name="A_Product" EntityType="CustomerMaterialService.A_Product">
+                    <NavigationPropertyBinding Path="to_Description" Target="A_ProductDescription"/>
+                </EntitySet>
+                <EntitySet Name="A_ProductDescription" EntityType="CustomerMaterialService.A_ProductDescription"/>
+                <EntitySet Name="A_CustomerMaterialComplex" EntityType="CustomerMaterialService.A_CustomerMaterialComplex"/>
+            </EntityContainer>
+            <EntityType Name="A_CustomerMaterial">
+                <Key>
+                    <PropertyRef Name="SalesOrganization"/>
+                    <PropertyRef Name="DistributionChannel"/>
+                    <PropertyRef Name="Customer"/>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="DistributionChannel" Type="Edm.String" MaxLength="2" Nullable="false"/>
+                <Property Name="Customer" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Material" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="MaterialByCustomer" Type="Edm.String" MaxLength="35"/>
+                <Property Name="MaterialDescriptionByCustomer" Type="Edm.String" MaxLength="40"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="DeliveryPriority" Type="Edm.String" MaxLength="2"/>
+                <Property Name="MinDeliveryQtyInBaseUnit" Type="Edm.Decimal" Scale="3" Precision="13"/>
+                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3"/>
+                <Property Name="PartialDeliveryIsAllowed" Type="Edm.String" MaxLength="1"/>
+                <Property Name="MaxNmbrOfPartialDelivery" Type="Edm.Decimal" Scale="0" Precision="1"/>
+                <Property Name="UnderdelivTolrtdLmtRatioInPct" Type="Edm.Decimal" Scale="1" Precision="3"/>
+                <Property Name="OverdelivTolrtdLmtRatioInPct" Type="Edm.Decimal" Scale="1" Precision="3"/>
+                <Property Name="UnlimitedOverdeliveryIsAllowed" Type="Edm.Boolean"/>
+                <Property Name="CustomerMaterialItemUsage" Type="Edm.String" MaxLength="4"/>
+                <Property Name="SalesUnit" Type="Edm.String" MaxLength="3"/>
+                <Property Name="SalesQtyToBaseQtyDnmntr" Type="Edm.Decimal" Scale="0" Precision="5"/>
+                <Property Name="SalesQtyToBaseQtyNmrtr" Type="Edm.Decimal" Scale="0" Precision="5"/>
+                <Property Name="ETag" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <EntityType Name="A_Product">
+                <Key>
+                    <PropertyRef Name="Product"/>
+                </Key>
+                <Property Name="Product" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="ProductType" Type="Edm.String" MaxLength="4"/>
+                <Property Name="GrossWeight" Type="Edm.Decimal" Scale="3" Precision="13"/>
+                <Property Name="WeightUnit" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="to_Description" Type="Collection(CustomerMaterialService.A_ProductDescription)"/>
+            </EntityType>
+            <EntityType Name="A_ProductDescription">
+                <Key>
+                    <PropertyRef Name="Product"/>
+                    <PropertyRef Name="Language"/>
+                </Key>
+                <Property Name="Product" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="Language" Type="Edm.String" MaxLength="2" Nullable="false"/>
+                <Property Name="ProductDescription" Type="Edm.String" MaxLength="40"/>
+            </EntityType>
+            <EntityType Name="A_CustomerMaterialComplex">
+                <Key>
+                    <PropertyRef Name="SalesOrganization"/>
+                    <PropertyRef Name="DistributionChannel"/>
+                    <PropertyRef Name="Customer"/>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="SalesOrganization" Type="Edm.String" MaxLength="4" Nullable="false"/>
+                <Property Name="DistributionChannel" Type="Edm.String" MaxLength="2" Nullable="false"/>
+                <Property Name="Customer" Type="Edm.String" MaxLength="10" Nullable="false"/>
+                <Property Name="Material" Type="Edm.String" MaxLength="40" Nullable="false"/>
+                <Property Name="MaterialByCustomer" Type="Edm.String" MaxLength="35"/>
+                <Property Name="MaterialDescriptionByCustomer" Type="Edm.String" MaxLength="40"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="DeliveryPriority" Type="Edm.String" MaxLength="2"/>
+                <Property Name="MinDeliveryQtyInBaseUnit" Type="Edm.Decimal" Scale="3" Precision="13"/>
+                <Property Name="BaseUnit" Type="Edm.String" MaxLength="3"/>
+                <Property Name="PartialDeliveryIsAllowed" Type="Edm.String" MaxLength="1"/>
+                <Property Name="MaxNmbrOfPartialDelivery" Type="Edm.Decimal" Scale="0" Precision="1"/>
+                <Property Name="UnderdelivTolrtdLmtRatioInPct" Type="Edm.Decimal" Scale="1" Precision="3"/>
+                <Property Name="OverdelivTolrtdLmtRatioInPct" Type="Edm.Decimal" Scale="1" Precision="3"/>
+                <Property Name="UnlimitedOverdeliveryIsAllowed" Type="Edm.Boolean"/>
+                <Property Name="CustomerMaterialItemUsage" Type="Edm.String" MaxLength="4"/>
+                <Property Name="SalesUnit" Type="Edm.String" MaxLength="3"/>
+                <Property Name="SalesQtyToBaseQtyDnmntr" Type="Edm.Decimal" Scale="0" Precision="5"/>
+                <Property Name="SalesQtyToBaseQtyNmrtr" Type="Edm.Decimal" Scale="0" Precision="5"/>
+                <Property Name="ETag" Type="Edm.String" MaxLength="10"/>
+            </EntityType>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>Customer</PropertyPath>
+                        <PropertyPath>Material</PropertyPath>
+                        <PropertyPath>MaterialByCustomer</PropertyPath>
+                        <PropertyPath>MaterialDescriptionByCustomer</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Customer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="Material"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MaterialByCustomer"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="MaterialDescriptionByCustomer"/>
+                        </Record>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Customer Materials"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/SalesOrganization">
+                <Annotation Term="Common.Label" String="Sales Organization"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/DistributionChannel">
+                <Annotation Term="Common.Label" String="Distribution Channel"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/Customer">
+                <Annotation Term="Common.Label" String="Customer"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/Material">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="A_Product"/>
+                        <PropertyValue Property="SearchSupported" Bool="false"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="ValueListProperty" String="Product"/>
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="Material"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="GrossWeight"/>
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="WeightUnit"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Common.Label" String="Material"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/MaterialByCustomer">
+                <Annotation Term="Common.Label" String="Customer Material"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/MaterialDescriptionByCustomer">
+                <Annotation Term="Common.Label" String="Customer Description"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/Plant">
+                <Annotation Term="Common.Label" String="Plant"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/DeliveryPriority">
+                <Annotation Term="Common.Label" String="Delivery Priority"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/MinDeliveryQtyInBaseUnit">
+                <Annotation Term="Common.Label" String="Minimum Delivery Qty"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/BaseUnit">
+                <Annotation Term="Common.Label" String="Base Unit of Measure"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/PartialDeliveryIsAllowed">
+                <Annotation Term="Common.Label" String="Partial Deliv./Item"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/MaxNmbrOfPartialDelivery">
+                <Annotation Term="Common.Label" String="Max.Part.Deliveries"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/UnderdelivTolrtdLmtRatioInPct">
+                <Annotation Term="Common.Label" String="Underdel. Tolerance"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/OverdelivTolrtdLmtRatioInPct">
+                <Annotation Term="Common.Label" String="Overdeliv. Tolerance"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/UnlimitedOverdeliveryIsAllowed">
+                <Annotation Term="Common.Label" String="Unlimited Tolerance"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/CustomerMaterialItemUsage">
+                <Annotation Term="Common.Label" String="Item Usage"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/SalesUnit">
+                <Annotation Term="Common.Label" String="Sales Unit"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/SalesQtyToBaseQtyDnmntr">
+                <Annotation Term="Common.Label" String="Denominator"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/SalesQtyToBaseQtyNmrtr">
+                <Annotation Term="Common.Label" String="Numerator"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterial/ETag">
+                <Annotation Term="Common.Label" String="ETag"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_Product">
+                <Annotation Term="Common.Label" String="Product"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_Product/Product">
+                <Annotation Term="Common.Label" String="Product"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_Product/ProductType">
+                <Annotation Term="Common.Label" String="Product Type"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_Product/GrossWeight">
+                <Annotation Term="Common.Label" String="Gross Weight"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_Product/WeightUnit">
+                <Annotation Term="Common.Label" String="Unit of Weight"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_ProductDescription">
+                <Annotation Term="Common.Label" String="Product Description"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_ProductDescription/Product">
+                <Annotation Term="Common.Label" String="Product"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_ProductDescription/Language">
+                <Annotation Term="Common.Label" String="Language Key"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_ProductDescription/ProductDescription">
+                <Annotation Term="Common.Label" String="Product Description"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex">
+                <Annotation Term="Common.Label" String="Customer Materials"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/SalesOrganization">
+                <Annotation Term="Common.Label" String="Sales Organization"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/DistributionChannel">
+                <Annotation Term="Common.Label" String="Distribution Channel"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/Customer">
+                <Annotation Term="Common.Label" String="Customer"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/Material">
+                <Annotation Term="Common.Label" String="Material"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/MaterialByCustomer">
+                <Annotation Term="Common.Label" String="Customer Material"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/MaterialDescriptionByCustomer">
+                <Annotation Term="Common.Label" String="Customer Description"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/Plant">
+                <Annotation Term="Common.Label" String="Plant"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/DeliveryPriority">
+                <Annotation Term="Common.Label" String="Delivery Priority"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/MinDeliveryQtyInBaseUnit">
+                <Annotation Term="Common.Label" String="Minimum Delivery Qty"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/BaseUnit">
+                <Annotation Term="Common.Label" String="Base Unit of Measure"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/PartialDeliveryIsAllowed">
+                <Annotation Term="Common.Label" String="Partial Deliv./Item"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/MaxNmbrOfPartialDelivery">
+                <Annotation Term="Common.Label" String="Max.Part.Deliveries"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/UnderdelivTolrtdLmtRatioInPct">
+                <Annotation Term="Common.Label" String="Underdel. Tolerance"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/OverdelivTolrtdLmtRatioInPct">
+                <Annotation Term="Common.Label" String="Overdeliv. Tolerance"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/UnlimitedOverdeliveryIsAllowed">
+                <Annotation Term="Common.Label" String="Unlimited Tolerance"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/CustomerMaterialItemUsage">
+                <Annotation Term="Common.Label" String="Item Usage"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/SalesUnit">
+                <Annotation Term="Common.Label" String="Sales Unit"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/SalesQtyToBaseQtyDnmntr">
+                <Annotation Term="Common.Label" String="Denominator"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/SalesQtyToBaseQtyNmrtr">
+                <Annotation Term="Common.Label" String="Numerator"/>
+            </Annotations>
+            <Annotations Target="CustomerMaterialService.A_CustomerMaterialComplex/ETag">
+                <Annotation Term="Common.Label" String="ETag"/>
+            </Annotations>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
