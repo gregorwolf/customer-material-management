@@ -13,7 +13,21 @@ module.exports = async function (srv) {
   const externalProduct = await cds.connect.to("API_PRODUCT_SRV");
 
   srv.on("READ", "A_Product", async (req) => {
+    req.query.where({ ProductType: "FERT" });
     return externalProduct.run(req.query);
+    /*
+    // $search seems not to be supported by backend
+    console.log(req.query);
+    if (req.query.SELECT.search) {
+      const searchedProduct = req.query.SELECT.search[0].val;
+      // try contains
+      req.query.where({ contains: { Product: searchedProduct } });
+      // and startswith
+      // req.query.where(`startswith(Product,'${searchedProduct}')`);
+      // both fail
+      delete req.query.SELECT.search;
+    }
+    */
   });
 
   srv.on("READ", "A_CustomerMaterial", async (req) => {
