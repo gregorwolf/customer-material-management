@@ -26,6 +26,9 @@ module.exports = async function (srv) {
   });
 
   srv.on("READ", "A_CustomerMaterial", async (req) => {
+    console.log("READ A_CustomerMaterial");
+    return externalCustomerMaterial.run(req.query);
+    /*
     try {
       // Restrict to Customer in User attribute
       var customerFilter = getCustomerFilter(req);
@@ -38,6 +41,7 @@ module.exports = async function (srv) {
         console.error("Request path: " + error.request.path);
       }
     }
+    */
   });
 
   srv.on("READ", "A_CustomerMaterialComplex", async (req) => {
