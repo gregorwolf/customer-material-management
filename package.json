@@ -28,6 +28,13 @@
     "watch-customer-material": "cds watch --open customer-material/webapp/index.html?sap-ui-xx-viewCache=false"
   },
   "cds": {
+    "log": {
+      "[development]": {
+        "levels": {
+          "customer-material-service": "trace"
+        }
+      }
+    },
     "requires": {
       "xdb": {
         "kind": "hana"

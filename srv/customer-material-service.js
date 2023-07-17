@@ -1,4 +1,5 @@
 const cds = require("@sap/cds");
+const LOG = cds.log("customer-material-service");
 
 module.exports = async function (srv) {
   // Connect to external services
@@ -12,7 +13,7 @@ module.exports = async function (srv) {
     return externalProduct.run(req.query);
     /*
     // $search seems not to be supported by backend
-    console.log(req.query);
+    LOG.info(req.query);
     if (req.query.SELECT.search) {
       const searchedProduct = req.query.SELECT.search[0].val;
       // try contains
@@ -26,22 +27,24 @@ module.exports = async function (srv) {
   });
 
   srv.on("READ", "A_CustomerMaterial", async (req) => {
-    console.log("READ A_CustomerMaterial");
-    return externalCustomerMaterial.run(req.query);
     /*
+    LOG.info("READ A_CustomerMaterial");
+    return externalCustomerMaterial.run(req.query);
+    */
     try {
       // Restrict to Customer in User attribute
       var customerFilter = getCustomerFilter(req);
+      LOG.trace("req.query before adjustment", req.query);
       req.query.where(customerFilter);
+      LOG.trace("req.query after adjustment", req.query);
       let result = await externalCustomerMaterial.run(req.query);
       return result;
     } catch (error) {
-      console.error("Error Message: " + error.message);
+      LOG.error("Error Message: " + error.message);
       if (error.request && error.request.path) {
-        console.error("Request path: " + error.request.path);
+        LOG.error("Request path: " + error.request.path);
       }
     }
-    */
   });
 
   srv.on("READ", "A_CustomerMaterialComplex", async (req) => {
@@ -80,9 +83,9 @@ module.exports = async function (srv) {
       return result
       */
     } catch (error) {
-      console.error("Error Message: " + error.message);
+      LOG.error("Error Message: " + error.message);
       if (error.request && error.request.path) {
-        console.error("Request Patch: " + error.request.path);
+        LOG.error("Request Patch: " + error.request.path);
       }
     }
   });
