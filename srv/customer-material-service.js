@@ -26,6 +26,13 @@ module.exports = async function (srv) {
     */
   });
 
+  srv.before("READ", "A_CustomerMaterial", async (req) => {
+    var customerFilter = getCustomerFilter(req);
+    LOG.trace("req.query before adjustment", req.query);
+    req.query.where(customerFilter);
+    LOG.trace("req.query after adjustment", req.query);
+  });
+
   srv.on("READ", "A_CustomerMaterial", async (req) => {
     /*
     LOG.info("READ A_CustomerMaterial");
@@ -33,10 +40,6 @@ module.exports = async function (srv) {
     */
     try {
       // Restrict to Customer in User attribute
-      var customerFilter = getCustomerFilter(req);
-      LOG.trace("req.query before adjustment", req.query);
-      req.query.where(customerFilter);
-      LOG.trace("req.query after adjustment", req.query);
       let result = await externalCustomerMaterial.run(req.query);
       return result;
     } catch (error) {
