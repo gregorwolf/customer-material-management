@@ -1,57 +1,57 @@
 ### Read count Customer Material
 ### Feature not supported: Method .count of fluent API
-GET http://localhost:4004/customer-material/A_CustomerMaterial
+GET http://localhost:4004/odata/v4/customer-material/A_CustomerMaterial
   ?$count=true
 Authorization: Basic customer1:customer1
 
 ### Read with $count is not forwarded to remote service
-GET http://localhost:4004/customer-material/A_CustomerMaterialSimple
+GET http://localhost:4004/odata/v4/customer-material/A_CustomerMaterialSimple
   ?$count=true
 Authorization: Basic customer1:customer1
 
 ### Read Customer Material
-GET http://localhost:4004/customer-material/A_CustomerMaterial
+GET http://localhost:4004/odata/v4/customer-material/A_CustomerMaterial
   ?$select=Material,MaterialByCustomer
 Authorization: Basic customer1:customer1
 
 ### Read Customer Material
-GET http://localhost:4004/customer-material/A_CustomerMaterial
+GET http://localhost:4004/odata/v4/customer-material/A_CustomerMaterial
   ?$select=Material,MaterialByCustomer
   &$filter=Material eq 'TG0011'
 Authorization: Basic customer1:customer1
 
 ### Read Customer Material like the Fiori Elements App
-GET http://localhost:4004/customer-material/A_CustomerMaterial
+GET http://localhost:4004/odata/v4/customer-material/A_CustomerMaterial
   ?$count=true&$select=Material,MaterialByCustomer
   &$skip=0
   &$top=30
 Authorization: Basic customer1:customer1
 
 ### Read Single Customer Material all columns
-GET http://localhost:4004/customer-material/A_CustomerMaterial%28SalesOrganization%3D%271710%27%2CDistributionChannel%3D%2710%27%2CCustomer%3D%271000021%27%2CMaterial%3D%27TG11%27%29
+GET http://localhost:4004/odata/v4/customer-material/A_CustomerMaterial%28SalesOrganization%3D%271710%27%2CDistributionChannel%3D%2710%27%2CCustomer%3D%271000021%27%2CMaterial%3D%27TG11%27%29
 Authorization: Basic customer1:customer1
 
 ### Read Single Customer Material all columns using Simple implementation
-GET http://localhost:4004/customer-material/A_CustomerMaterialSimple%28SalesOrganization%3D%271710%27%2CDistributionChannel%3D%2710%27%2CCustomer%3D%271000021%27%2CMaterial%3D%27TG11%27%29
+GET http://localhost:4004/odata/v4/customer-material/A_CustomerMaterialSimple%28SalesOrganization%3D%271710%27%2CDistributionChannel%3D%2710%27%2CCustomer%3D%271000021%27%2CMaterial%3D%27TG11%27%29
 Authorization: Basic customer1:customer1
 
 
 ### Read Customer Material V2
-GET http://localhost:4004/v2/customer-material/A_CustomerMaterial?$select=Material,MaterialByCustomer
+GET http://localhost:4004/odata/v2/customer-material/A_CustomerMaterial?$select=Material,MaterialByCustomer
 Authorization: Basic customer1:customer1
 
 ### Read Single Customer Material V2 and restrict columns
-GET http://localhost:4004/v2/customer-material/A_CustomerMaterial%28SalesOrganization%3D%271710%27%2CDistributionChannel%3D%2710%27%2CCustomer%3D%271000021%27%2CMaterial%3D%27TG11%27%29?$select=Material,MaterialByCustomer
+GET http://localhost:4004/odata/v2/customer-material/A_CustomerMaterial%28SalesOrganization%3D%271710%27%2CDistributionChannel%3D%2710%27%2CCustomer%3D%271000021%27%2CMaterial%3D%27TG11%27%29?$select=Material,MaterialByCustomer
 Authorization: Basic customer1:customer1
 
 ### Read Single Customer Material V2 all columns
-GET http://localhost:4004/v2/customer-material/A_CustomerMaterial%28SalesOrganization%3D%271710%27%2CDistributionChannel%3D%2710%27%2CCustomer%3D%271000021%27%2CMaterial%3D%27TG11%27%29
+GET http://localhost:4004/odata/v2/customer-material/A_CustomerMaterial%28SalesOrganization%3D%271710%27%2CDistributionChannel%3D%2710%27%2CCustomer%3D%271000021%27%2CMaterial%3D%27TG11%27%29
 Authorization: Basic customer1:customer1
 
 ### Read Customer Material filtered
-GET http://localhost:4004/customer-material/A_CustomerMaterial?$filter=Material eq 'TG11'&$select=Material,MaterialByCustomer
+GET http://localhost:4004/odata/v4/customer-material/A_CustomerMaterial?$filter=Material eq 'TG11'&$select=Material,MaterialByCustomer
 Authorization: Basic customer1:customer1
 
 ### Read Customer Material filtered
-GET http://localhost:4004/customer-material/A_CustomerMaterial?$filter=Customer eq '1000046'&$select=Material,MaterialByCustomer
+GET http://localhost:4004/odata/v4/customer-material/A_CustomerMaterial?$filter=Customer eq '1000046'&$select=Material,MaterialByCustomer
 Authorization: Basic customer1:customer1

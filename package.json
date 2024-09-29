@@ -6,19 +6,19 @@
   "license": "MIT",
   "private": false,
   "engines": {
-    "node": "^18"
+    "node": "^20"
   },
   "dependencies": {
-    "@sap-cloud-sdk/http-client": "^2",
-    "@sap/cds": "^6",
-    "@sap/cds-odata-v2-adapter-proxy": "^1",
+    "@cap-js-community/odata-v2-adapter": "^1",
+    "@sap-cloud-sdk/http-client": "^3",
+    "@sap/cds": "^8",
     "express": "^4",
     "hdb": "^0",
     "passport": "^0"
   },
   "devDependencies": {
-    "@sap/ux-specification": "^1.102.16",
-    "cds-launchpad-plugin": "^1.0.8",
+    "@sap/ux-specification": "^1.120.x",
+    "cds-launchpad-plugin": "^2",
     "sqlite3": "^5"
   },
   "scripts": {
