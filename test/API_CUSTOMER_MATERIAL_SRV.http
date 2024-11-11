@@ -1,8 +1,18 @@
 ###
 GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CUSTOMER_MATERIAL_SRV/A_CustomerMaterial
   ?$select=Material,MaterialByCustomer,SalesOrganization,DistributionChannel,Customer
-  &$orderby=SalesOrganization%20asc,DistributionChannel%20asc,Customer%20asc,Material%20asc
-  &$filter=Customer%20eq%20'10100080'
+  &$orderby=SalesOrganization asc,DistributionChannel asc,Customer asc,Material asc
+  &$filter=Customer eq '10100080'
+  &$inlinecount=allpages
   &$top=1000
+APIKey: {{$dotenv APIKey}}
+Accept: application/json
+###
+GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_CUSTOMER_MATERIAL_SRV/A_CustomerMaterial
+  ?$select=Material,MaterialByCustomer,SalesOrganization,DistributionChannel,Customer
+  &$orderby=SalesOrganization asc,DistributionChannel asc,Customer asc,Material asc
+  &$filter=Customer eq '10100001'
+  &$inlinecount=allpages
+  &$top=10
 APIKey: {{$dotenv APIKey}}
 Accept: application/json

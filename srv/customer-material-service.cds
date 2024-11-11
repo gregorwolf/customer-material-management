@@ -4,15 +4,24 @@ using {API_CUSTOMER_MATERIAL_SRV as externalCustomerMaterial} from './external/A
 
 service CustomerMaterialService {
 
+  @(restrict: [{
+    grant: 'READ',
+    where: 'Customer = $user.customer'
+  }])
   entity A_CustomerMaterial        as projection on externalCustomerMaterial.A_CustomerMaterial;
 
-  entity A_Product                 as projection on externalProduct.A_Product {
-    Product,
-    ProductType,
-    GrossWeight,
-    WeightUnit,
-    to_Description
-  };
+  @(restrict: [{
+    grant: 'READ',
+    where: 'ProductType = ''FERT'''
+  }])
+  entity A_Product                 as
+    projection on externalProduct.A_Product {
+      Product,
+      ProductType,
+      GrossWeight,
+      WeightUnit,
+      to_Description
+    };
 
   entity A_ProductDescription      as projection on externalProduct.A_ProductDescription;
   entity A_CustomerMaterialComplex as projection on externalCustomerMaterial.A_CustomerMaterial;

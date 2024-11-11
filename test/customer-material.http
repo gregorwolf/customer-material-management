@@ -1,3 +1,7 @@
+###
+GET http://localhost:4004/odata/v4/customer-material/A_CustomerMaterial
+  ?$count=true
+Authorization: Basic admin:admin
 ### Read count Customer Material
 ### Feature not supported: Method .count of fluent API
 GET http://localhost:4004/odata/v4/customer-material/A_CustomerMaterial

@@ -4,6 +4,7 @@ GET https://sandbox.api.sap.com/s4hanacloud/sap/opu/odata/sap/API_PRODUCT_SRV/A_
   &$select=Product,ProductType,to_Description/*
   #,to_ProductSales/*,to_ProductBasicText/*
   &$expand=to_Description
+  &$inlinecount=allpages
   #,to_ProductSales,to_ProductBasicText
   &$filter=ProductType eq 'FERT'
 APIKey: {{$dotenv APIKey}}

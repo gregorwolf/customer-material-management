@@ -2,6 +2,7 @@
 ### Feature not supported: Method .count of fluent API
 GET http://localhost:4004/odata/v4/customer-material/A_Product
   ?$top=10
-  &$filter=Product eq 'MZ-SG-BK-01'
+  &$filter=Product eq '200001004'
+  &$count=true
   &$expand=to_Description
 Authorization: Basic customer1:customer1
